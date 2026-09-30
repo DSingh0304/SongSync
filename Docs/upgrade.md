@@ -1,0 +1,89 @@
+# SongSync V2 Roadmap & Implementation Plan
+
+This document outlines the technical strategy for implementing the next generation of features for SongSync.
+
+---
+
+## 1. Reactions & Emojis
+**Goal**: Floating real-time emojis (❤️, 🔥, 🎉) across the screen.
+- **Backend**: Add a socket event `c2s:room:reaction` that broadcasts `s2c:room:reaction` to all clients in the room containing the emoji type and a random ID.
+- **Frontend**: 
+  - Create an overlay `ReactionLayer` component positioned absolutely over the `RoomScreen`.
+  - Use `react-native-reanimated` to generate random X-coordinates and animate the Y-coordinate upwards with a slight sine-wave wobble.
+  - Expire and unmount the emoji components after ~3 seconds.
+
+## 2. Spotify/Apple Music Import
+**Goal**: Paste a playlist link, auto-queue YouTube equivalents.
+- **Backend**: 
+  - Create a new Express route `/api/import/spotify`.
+  - Integrate `spotify-url-info` or the official Spotify Web API to extract track names and artists from a playlist URL.
+  - Map over the extracted tracks, hitting the existing `youtubeProxy` search internally (`query = "Track Name Artist"`).
+  - Add the top result of each to the queue.
+- **Frontend**: Add a "Paste Link" button in the `SearchScreen` that triggers the import sequence and displays an `ActivityIndicator` while batching.
+
+## 3. Lock-Screen Media Controls
+**Goal**: Native OS play/pause/skip controls (Host only).
+- **Backend**: No changes needed.
+- **Frontend**: 
+  - Wait for `expo-audio` to fully stabilize its background lock-screen APIs (or supplement with `expo-av` metadata definitions).
+  - Bind the native lock-screen events (Play, Pause, Next) directly to our existing `socketService.getSocket().emit()` functions in `trackPlayerService.ts`.
+
+## 4. Synchronized Lyrics
+**Goal**: Scrolling lyrics synced to the playhead.
+- **Backend**: 
+  - Add an endpoint `/api/lyrics?track=...&artist=...` that queries an open API like `lrclib.net`.
+  - Fetch and parse the `.lrc` format (which contains timestamps).
+- **Frontend**: 
+  - Build a `LyricsView` component.
+  - Subscribe to the `position` state from `Player.tsx`.
+  - Highlight the active line of text when `position >= line.timestamp`.
+  - Use a `ScrollView` with a `scrollTo` ref to automatically scroll the active line into the center.
+
+## 5. Expandable Full-Screen Player
+**Goal**: Tap the mini-player to open a Spotify-style full player.
+- **Frontend**: 
+  - Refactor `Player.tsx` into two components: `MiniPlayer` and `FullPlayer`.
+  - Wrap them in a `react-native-reanimated` bottom sheet or standard `Modal`.
+  - Move the scrubber, Play/Pause/Skip buttons, and the new Lyrics toggle into the `FullPlayer`.
+  - Use `react-native-gesture-handler` so users can swipe down to collapse the full player back into the mini-player.
+
+## 6. Audio Visualizer
+**Goal**: Live reacting waveforms.
+- **Frontend**: 
+  - Utilize `expo-audio`'s `useAudioSampleListener` hook, which provides raw waveform data.
+  - Feed the array of amplitude data into an SVG or Canvas component (`react-native-svg` or `react-native-skia`).
+  - Render bouncing vertical bars where the height is driven by the frequency/amplitude data.
+
+## 7. Drag-and-Drop Queue
+**Goal**: Reorder songs manually.
+- **Backend**: Add a `c2s:queue:reorder` event accepting `fromIndex` and `toIndex`. Update the server array via `queue.splice()` and broadcast.
+- **Frontend**: 
+  - Replace the standard `FlatList` in `Queue.tsx` with `react-native-draggable-flatlist`.
+  - Wrap items in `ScaleDecorator` for a pop-out effect while dragging.
+  - On `onDragEnd`, optimistically update the local Zustand store and emit the socket event.
+
+## 8. Rich Avatars & Profiles
+**Goal**: Custom profile pictures or preset fun avatars.
+- **Backend**: Add `avatarId` or `avatarUrl` to the `Participant` interface and `RoomJoinSchema`.
+- **Frontend**: 
+  - Update `HomeScreen.tsx` to include an avatar selection carousel before joining/creating a room.
+  - Save the chosen avatar to local storage (`AsyncStorage`) so it persists.
+  - Update `ParticipantList.tsx` and the Chat UI to render `Image` components instead of text initials.
+
+## 9. Fluid Animations
+**Goal**: Butter-smooth UI transitions.
+- **Frontend**: 
+  - Install `react-native-reanimated`.
+  - Apply `Layout.springify()` to the `Queue` items so they slide naturally when a song is removed or finishes.
+  - Animate the opening of the Chat modal with a custom spring curve instead of the clunky default native modal slide.
+
+## 10. Glassmorphism & Themes
+**Goal**: Blur effects and dynamic colors.
+- **Frontend**: 
+  - Install `expo-blur`.
+  - Wrap the `MiniPlayer` and `Header` in `<BlurView tint="dark" intensity={50}>`.
+  - (Optional) Install `react-native-image-colors` to extract the dominant hex color from the currently playing YouTube thumbnail.
+  - Create a custom hook to transition the app's background gradient dynamically to match the current album art.
+
+---
+*Generated by Antigravity AI*
