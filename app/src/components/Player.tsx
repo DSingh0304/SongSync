@@ -23,7 +23,6 @@ export default function Player() {
   const [position, setPosition] = useState(0);
   const [isExpanded, setIsExpanded] = useState(false);
   const [showLyrics, setShowLyrics] = useState(false);
-  const [audioLevel, setAudioLevel] = useState(0);
 
 
   useEffect(() => {
@@ -93,7 +92,7 @@ export default function Player() {
             </View>
             <View style={styles.miniControls}>
               <TouchableOpacity onPress={handlePlayPause} disabled={!isHost || isBuffering} style={styles.controlBtn}>
-                <Ionicons name={isPlaying ? "pause" : "play"} size={28} color={isHost ? "#fff" : "#555"} />
+                <Ionicons name={isPlaying ? "pause" : "play"} size={28} color={isHost ? "#F8FAFC" : "#94A3B8"} />
               </TouchableOpacity>
             </View>
           </View>
@@ -104,11 +103,11 @@ export default function Player() {
         <SafeAreaView style={styles.fullContainer}>
           <View style={styles.fullHeader}>
             <TouchableOpacity onPress={() => setIsExpanded(false)} style={styles.closeBtn}>
-              <Ionicons name="chevron-down" size={32} color="#fff" />
+              <Ionicons name="chevron-down" size={32} color="#F8FAFC" />
             </TouchableOpacity>
             <Text style={styles.fullHeaderTitle}>Now Playing</Text>
             <TouchableOpacity onPress={() => setShowLyrics(!showLyrics)} style={styles.lyricsToggle}>
-              <Ionicons name="text" size={24} color={showLyrics ? "#1DB954" : "#888"} />
+              <Ionicons name="text" size={24} color={showLyrics ? "#10B981" : "#94A3B8"} />
             </TouchableOpacity>
           </View>
 
@@ -117,9 +116,6 @@ export default function Player() {
           ) : (
             <View style={styles.fullArtContainer}>
               <Image source={{ uri: track.thumbnailUrl }} style={styles.fullThumbnail} />
-              <View style={[styles.visualizerOverlay, { opacity: audioLevel * 1.5 }]}>
-                <Ionicons name="pulse" size={64} color="#1DB954" />
-              </View>
             </View>
           )}
 
@@ -147,15 +143,15 @@ export default function Player() {
             {/* Full Controls */}
             <View style={styles.fullControls}>
               <TouchableOpacity onPress={handlePrevious} disabled={!isHost}>
-                <Ionicons name="play-skip-back" size={40} color={isHost ? "#fff" : "#555"} />
+                <Ionicons name="play-skip-back" size={40} color={isHost ? "#F8FAFC" : "#94A3B8"} />
               </TouchableOpacity>
               
               <TouchableOpacity onPress={handlePlayPause} disabled={!isHost || isBuffering} style={styles.playPauseBtnBig}>
-                <Ionicons name={isPlaying ? "pause" : "play"} size={48} color="#000" />
+                <Ionicons name={isPlaying ? "pause" : "play"} size={48} color="#0F172A" />
               </TouchableOpacity>
               
               <TouchableOpacity onPress={handleSkip} disabled={!isHost}>
-                <Ionicons name="play-skip-forward" size={40} color={isHost ? "#fff" : "#555"} />
+                <Ionicons name="play-skip-forward" size={40} color={isHost ? "#F8FAFC" : "#94A3B8"} />
               </TouchableOpacity>
             </View>
           </View>
@@ -166,39 +162,39 @@ export default function Player() {
 }
 
 const styles = StyleSheet.create({
-  miniContainer: { backgroundColor: '#181818', borderBottomWidth: 1, borderBottomColor: '#333' },
-  miniProgressBarBg: { height: 2, backgroundColor: '#333', width: '100%' },
-  miniProgressBarFill: { height: 2, backgroundColor: '#fff' },
+  miniContainer: { backgroundColor: '#1E293B', borderBottomWidth: 1, borderBottomColor: '#475569' },
+  miniProgressBarBg: { height: 2, backgroundColor: '#475569', width: '100%' },
+  miniProgressBarFill: { height: 2, backgroundColor: '#F8FAFC' },
   miniInner: { flexDirection: 'row', alignItems: 'center', padding: 8, paddingHorizontal: 16 },
   miniThumbnail: { width: 48, height: 48, borderRadius: 4, marginRight: 12 },
   miniInfo: { flex: 1 },
-  miniTitle: { color: '#fff', fontSize: 14, fontWeight: 'bold' },
-  miniArtist: { color: '#aaa', fontSize: 12, marginTop: 2 },
+  miniTitle: { color: '#F8FAFC', fontSize: 14, fontWeight: 'bold' },
+  miniArtist: { color: '#CBD5E1', fontSize: 12, marginTop: 2 },
   miniControls: { flexDirection: 'row', alignItems: 'center' },
   controlBtn: { padding: 8 },
 
-  fullContainer: { flex: 1, backgroundColor: '#121212' },
+  fullContainer: { flex: 1, backgroundColor: '#1E293B' },
   fullHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, paddingTop: 16, paddingBottom: 8 },
   closeBtn: { padding: 4 },
-  fullHeaderTitle: { color: '#fff', fontSize: 14, fontWeight: 'bold' },
+  fullHeaderTitle: { color: '#F8FAFC', fontSize: 14, fontWeight: 'bold' },
   lyricsToggle: { padding: 4 },
   
   fullArtContainer: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 32 },
-  fullThumbnail: { width: '100%', aspectRatio: 1, borderRadius: 8, backgroundColor: '#333' },
+  fullThumbnail: { width: '100%', aspectRatio: 1, borderRadius: 8, backgroundColor: '#475569' },
   visualizerOverlay: { position: 'absolute', width: '100%', aspectRatio: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: 'rgba(0,0,0,0.5)', borderRadius: 8 },
   
   fullBottom: { paddingHorizontal: 32, paddingBottom: 48 },
   fullInfoRow: { marginBottom: 24 },
-  fullTitle: { color: '#fff', fontSize: 24, fontWeight: 'bold', marginBottom: 4 },
-  fullArtist: { color: '#aaa', fontSize: 16 },
+  fullTitle: { color: '#F8FAFC', fontSize: 24, fontWeight: 'bold', marginBottom: 4 },
+  fullArtist: { color: '#CBD5E1', fontSize: 16 },
   
   scrubberContainer: { marginBottom: 24 },
   scrubberHitbox: { height: 32, justifyContent: 'center' },
-  scrubberBg: { height: 4, backgroundColor: '#444', borderRadius: 2, overflow: 'hidden' },
-  scrubberFill: { height: '100%', backgroundColor: '#fff' },
+  scrubberBg: { height: 4, backgroundColor: '#64748B', borderRadius: 2, overflow: 'hidden' },
+  scrubberFill: { height: '100%', backgroundColor: '#F8FAFC' },
   timeRow: { flexDirection: 'row', justifyContent: 'space-between', marginTop: 4 },
-  timeText: { color: '#888', fontSize: 12 },
+  timeText: { color: '#94A3B8', fontSize: 12 },
   
   fullControls: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', gap: 32 },
-  playPauseBtnBig: { width: 80, height: 80, borderRadius: 40, backgroundColor: '#fff', justifyContent: 'center', alignItems: 'center' },
+  playPauseBtnBig: { width: 80, height: 80, borderRadius: 40, backgroundColor: '#F8FAFC', justifyContent: 'center', alignItems: 'center' },
 });
