@@ -1,12 +1,12 @@
 {
   "expo": {
     "newArchEnabled": false,
-    "name": "app",
+    "name": "VibeSync",
     "scheme": "songsync",
-    "slug": "app",
+    "slug": "vibesync",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/icon.jpg",
     "userInterfaceStyle": "light",
     "ios": {
       "bundleIdentifier": "com.songsync.app",
@@ -16,7 +16,7 @@
       "package": "com.songsync.app",
       "adaptiveIcon": {
         "backgroundColor": "#0F172A",
-        "foregroundImage": "./assets/android-icon-foreground.png",
+        "foregroundImage": "./assets/icon.jpg",
         "backgroundImage": "./assets/android-icon-background.png",
         "monochromeImage": "./assets/android-icon-monochrome.png"
       },
