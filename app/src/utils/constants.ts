@@ -1,13 +1,11 @@
 console.log("[CONFIG] SERVER_URL is:", process.env.EXPO_PUBLIC_SERVER_URL ?? "http://10.0.2.2:3000");
 // app/src/utils/constants.ts
 
-// ── Server ─────────────────────────────────────────────────────────────────────
 // Development: use LAN IP for physical devices, 10.0.2.2 for Android emulator
 // Production: replace with your Render URL
 export const SERVER_URL =
   process.env.EXPO_PUBLIC_SERVER_URL ?? 'http://10.0.2.2:3000';
 
-// ── Socket.io Event Names ──────────────────────────────────────────────────────
 export const EVENTS = {
   // Room lifecycle
   ROOM_CREATE: 'c2s:room:create',
@@ -50,7 +48,6 @@ export const EVENTS = {
   CHAT_MESSAGE_RECV: 's2c:chat:message',
 } as const;
 
-// ── Sync Config ────────────────────────────────────────────────────────────────
 export const SYNC = {
   DRIFT_DEADBAND_MS: 150,       // Ignore drift below this (imperceptible)
   DRIFT_SLEW_THRESHOLD_MS: 800, // Above this — hard seek instead of rate slew
