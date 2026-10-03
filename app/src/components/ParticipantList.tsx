@@ -36,7 +36,7 @@ export default function ParticipantList() {
   return (
     <View style={styles.container}>
       <View style={styles.header}>
-        <Ionicons name="people" size={18} color="#aaa" />
+        <Ionicons name="people" size={18} color="#CBD5E1" />
         <Text style={styles.headerText}>{participants.length} / 8</Text>
       </View>
       
@@ -60,7 +60,7 @@ export default function ParticipantList() {
             )}
             {item.isHost && (
               <View style={styles.hostBadge}>
-                <Ionicons name="star" size={8} color="#000" />
+                <Ionicons name="star" size={8} color="#0F172A" />
               </View>
             )}
           </TouchableOpacity>
@@ -71,12 +71,12 @@ export default function ParticipantList() {
 }
 
 const styles = StyleSheet.create({
-  container: { paddingVertical: 12, paddingHorizontal: 16, backgroundColor: '#121212', borderBottomWidth: 1, borderBottomColor: '#222' },
+  container: { paddingVertical: 12, paddingHorizontal: 16, backgroundColor: '#1E293B', borderBottomWidth: 1, borderBottomColor: '#334155' },
   header: { flexDirection: 'row', alignItems: 'center', marginBottom: 8, gap: 6 },
-  headerText: { color: '#aaa', fontSize: 12, fontWeight: 'bold' },
-  avatar: { width: 36, height: 36, borderRadius: 18, backgroundColor: '#333', justifyContent: 'center', alignItems: 'center', marginRight: 8 },
+  headerText: { color: '#CBD5E1', fontSize: 12, fontWeight: 'bold' },
+  avatar: { width: 36, height: 36, borderRadius: 18, backgroundColor: '#475569', justifyContent: 'center', alignItems: 'center', marginRight: 8 },
   myAvatar: { borderWidth: 2, borderColor: '#4caf50' },
-  avatarInitial: { color: '#fff', fontSize: 16, fontWeight: 'bold' },
+  avatarInitial: { color: '#F8FAFC', fontSize: 16, fontWeight: 'bold' },
   avatarEmoji: { fontSize: 22 },
-  hostBadge: { position: 'absolute', bottom: -2, right: -2, backgroundColor: '#ffc107', width: 14, height: 14, borderRadius: 7, justifyContent: 'center', alignItems: 'center' },
+  hostBadge: { position: 'absolute', bottom: -2, right: -2, backgroundColor: '#F59E0B', width: 14, height: 14, borderRadius: 7, justifyContent: 'center', alignItems: 'center' },
 });
