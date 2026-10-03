@@ -141,30 +141,30 @@ function parseLrc(lrc: string): LyricLine[] {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
+    backgroundColor: '#0F172A',
     padding: 16,
   },
   scrollContent: {
     paddingVertical: 100,
   },
   empty: {
-    color: '#888',
+    color: '#94A3B8',
     textAlign: 'center',
     marginTop: 40,
   },
   line: {
-    color: '#666',
+    color: '#64748B',
     fontSize: 20,
     lineHeight: 36,
     fontWeight: '600',
     textAlign: 'center',
   },
   activeLine: {
-    color: '#fff',
+    color: '#F8FAFC',
     fontSize: 24,
   },
   plainLyricsText: {
-    color: '#fff',
+    color: '#F8FAFC',
     fontSize: 20,
     lineHeight: 32,
     textAlign: 'center',
