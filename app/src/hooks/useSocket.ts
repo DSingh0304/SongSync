@@ -7,6 +7,7 @@ import { usePlayerStore } from '../stores/playerStore';
 import { useQueueStore } from '../stores/queueStore';
 import { useChatStore } from '../stores/chatStore';
 import { EVENTS } from '../utils/constants';
+import { Alert } from 'react-native';
 
 // We share one clock synchronizer instance app-wide while in a room
 export const clockSyncRef = { current: null as ClockSynchronizer | null };
@@ -24,7 +25,6 @@ export function useSocket() {
   const addMessage = useChatStore((s) => s.addMessage);
 
   useEffect(() => {
-    // ── Room Events ────────────────────────────────────────────────────────────
     socket.on(EVENTS.ROOM_CREATED, async ({ roomId, userId, roomState }) => {
       socketService.setSession(roomId, userId);
       setRoom(roomId, userId, roomState.participants[0].displayName, true, roomState.queueIndex);
@@ -68,13 +68,17 @@ export function useSocket() {
       removeParticipant('', newHostId); // empty userId means just update host flag
     });
 
-    socket.on(EVENTS.ROOM_ERROR, ({ message }) => {
-      console.warn('[Server Error]', message);
-      // In a real app, you'd show a toast here
-      alert(message);
+    socket.on(EVENTS.ROOM_ERROR, (payload) => {
+      const { code, message } = payload || {};
+      if (code === 'INVALID_PAYLOAD') {
+        console.warn('[Server Technical Error]', message);
+        return;
+      }
+      if (message) {
+        Alert.alert('Notice', message);
+      }
     });
 
-    // ── Playback Events ────────────────────────────────────────────────────────
     socket.on(EVENTS.PLAYBACK_SYNC, (playback) => {
       setPlaybackState(playback);
     });
@@ -91,7 +95,6 @@ export function useSocket() {
       setQueue(queue);
     });
 
-    // ── Queue Events ───────────────────────────────────────────────────────────
     socket.on(EVENTS.QUEUE_UPDATED, ({ queue }) => {
       setQueue(queue);
       setExtracting(null);
@@ -101,7 +104,6 @@ export function useSocket() {
       setExtracting(videoId);
     });
 
-    // ── Chat Events ────────────────────────────────────────────────────────────
     socket.on(EVENTS.CHAT_MESSAGE_RECV, (message) => {
       addMessage(message);
     });
