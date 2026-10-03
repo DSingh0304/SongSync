@@ -120,20 +120,20 @@ export default function SearchScreen() {
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.header}>
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backBtn}>
-          <Ionicons name="close" size={28} color="#fff" />
+          <Ionicons name="close" size={28} color="#F8FAFC" />
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Search YouTube</Text>
         <View style={styles.placeholder} />
       </View>
 
       <View style={styles.searchBox}>
-        <Ionicons name="search" size={20} color="#888" style={styles.searchIcon} />
-        <TextInput style={styles.searchInput} value={query} onChangeText={setQuery} placeholder="Song name or YouTube URL..." placeholderTextColor="#888" autoFocus clearButtonMode="while-editing" autoCorrect={false} />
+        <Ionicons name="search" size={20} color="#94A3B8" style={styles.searchIcon} />
+        <TextInput style={styles.searchInput} value={query} onChangeText={setQuery} placeholder="Song name or YouTube URL..." placeholderTextColor="#94A3B8" autoFocus clearButtonMode="while-editing" autoCorrect={false} />
       </View>
 
       {query.includes('spotify.com') && (
         <TouchableOpacity style={styles.spotifyBtn} onPress={handleSpotifyImport}>
-          <Ionicons name="logo-nodejs" size={20} color="#1DB954" />
+          <Ionicons name="logo-nodejs" size={20} color="#10B981" />
           <Text style={styles.spotifyBtnText}>Import Spotify Playlist (Max 20)</Text>
         </TouchableOpacity>
       )}
@@ -141,28 +141,28 @@ export default function SearchScreen() {
       {error ? (
         <View style={styles.centerBox}><Text style={styles.errorText}>{error}</Text></View>
       ) : isLoading ? (
-        <View style={styles.centerBox}><ActivityIndicator size="large" color="#fff" /></View>
+        <View style={styles.centerBox}><ActivityIndicator size="large" color="#F8FAFC" /></View>
       ) : results.length === 0 && debouncedQuery.length >= 3 ? (
         <View style={styles.centerBox}><Text style={styles.emptyText}>No results found</Text></View>
       ) : (
-        <FlatList data={results} keyExtractor={(item) => item.videoId} renderItem={({ item }) => <SearchResult item={item} onAdd={handleAdd} />} keyboardShouldPersistTaps="handled" />
+        <FlatList data={results} keyExtractor={(item, idx) => item.videoId + '-' + idx} renderItem={({ item }) => <SearchResult item={item} onAdd={handleAdd} />} keyboardShouldPersistTaps="handled" />
       )}
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: '#000' },
-  header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: 16, borderBottomWidth: 1, borderBottomColor: '#222' },
+  safeArea: { flex: 1, backgroundColor: '#0F172A' },
+  header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', padding: 16, borderBottomWidth: 1, borderBottomColor: '#334155' },
   backBtn: { padding: 4 },
-  headerTitle: { color: '#fff', fontSize: 18, fontWeight: 'bold' },
+  headerTitle: { color: '#F8FAFC', fontSize: 18, fontWeight: 'bold' },
   placeholder: { width: 36 },
-  searchBox: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#1a1a1a', margin: 16, borderRadius: 8, paddingHorizontal: 12 },
+  searchBox: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#1E293B', margin: 16, borderRadius: 8, paddingHorizontal: 12 },
   searchIcon: { marginRight: 8 },
-  searchInput: { flex: 1, height: 48, color: '#fff', fontSize: 16 },
+  searchInput: { flex: 1, height: 48, color: '#F8FAFC', fontSize: 16 },
   centerBox: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 32 },
-  errorText: { color: '#ff4444', textAlign: 'center' },
-  emptyText: { color: '#888', textAlign: 'center' },
-  spotifyBtn: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#1DB95422', marginHorizontal: 16, marginBottom: 16, padding: 12, borderRadius: 8, justifyContent: 'center', gap: 8 },
-  spotifyBtnText: { color: '#1DB954', fontWeight: 'bold' },
+  errorText: { color: '#EF4444', textAlign: 'center' },
+  emptyText: { color: '#94A3B8', textAlign: 'center' },
+  spotifyBtn: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#10B98122', marginHorizontal: 16, marginBottom: 16, padding: 12, borderRadius: 8, justifyContent: 'center', gap: 8 },
+  spotifyBtnText: { color: '#10B981', fontWeight: 'bold' },
 });
