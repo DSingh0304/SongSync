@@ -16,7 +16,6 @@ import lyricsRouter from './lyricsProxy.js';
 
 const PORT = parseInt(process.env.PORT ?? '3000', 10);
 
-// ─── Express setup ─────────────────────────────────────────────────────────────
 const app = express();
 
 app.use(cors({ origin: '*' }));
@@ -32,7 +31,6 @@ app.use('/api/youtube', youtubeRouter);
 app.use('/api/spotify', spotifyRouter);
 app.use('/api/lyrics', lyricsRouter);
 
-// ─── HTTP + Socket.io setup ────────────────────────────────────────────────────
 const httpServer = createServer(app);
 
 const io = new Server(httpServer, {
@@ -45,7 +43,6 @@ const io = new Server(httpServer, {
   pingTimeout: 20_000,      // Disconnect if no pong within 20s
 });
 
-// ─── Socket.io connection handler ─────────────────────────────────────────────
 io.on('connection', (socket) => {
   console.log(`[Socket] Connected: ${socket.id}`);
 
@@ -60,7 +57,6 @@ io.on('connection', (socket) => {
   });
 });
 
-// ─── Start server ──────────────────────────────────────────────────────────────
 httpServer.listen(PORT, () => {
   console.log(`
 ╔══════════════════════════════════════╗
@@ -72,7 +68,6 @@ httpServer.listen(PORT, () => {
 
 export { io };
 
-// ─── Global Error Hardening ───────────────────────────────────────────────────
 process.on('uncaughtException', (err) => {
   console.error('[CRITICAL] Uncaught Exception:', err);
 });
