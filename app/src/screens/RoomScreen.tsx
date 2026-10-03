@@ -89,11 +89,11 @@ export default function RoomScreen() {
           </View>
           <View style={styles.headerRight}>
             <TouchableOpacity style={styles.addBtn} onPress={() => navigation.navigate('Search')}>
-              <Ionicons name="search" size={20} color="#000" />
+              <Ionicons name="search" size={20} color="#0F172A" />
               <Text style={styles.addBtnText}>Search Song</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.leaveBtn} onPress={handleLeave}>
-              <Ionicons name="exit-outline" size={24} color="#ff4444" />
+              <Ionicons name="exit-outline" size={24} color="#EF4444" />
             </TouchableOpacity>
           </View>
         </View>
@@ -116,7 +116,7 @@ export default function RoomScreen() {
           style={[styles.floatingChatBtn, { bottom: 24 }]} 
           onPress={() => setChatVisible(true)}
         >
-          <Ionicons name="chatbubbles" size={24} color="#fff" />
+          <Ionicons name="chatbubbles" size={24} color="#F8FAFC" />
           <Text style={styles.chatBadgeText}>{messages.length}</Text>
         </TouchableOpacity>
 
@@ -127,7 +127,7 @@ export default function RoomScreen() {
               <View style={styles.chatModalHeader}>
                 <Text style={styles.chatModalTitle}>Live Chat</Text>
                 <TouchableOpacity onPress={() => setChatVisible(false)}>
-                  <Ionicons name="close-circle" size={28} color="#888" />
+                  <Ionicons name="close-circle" size={28} color="#94A3B8" />
                 </TouchableOpacity>
               </View>
               <KeyboardAvoidingView 
@@ -145,14 +145,14 @@ export default function RoomScreen() {
 }
 
 const styles = StyleSheet.create({
-  safeArea: { flex: 1, backgroundColor: '#000' },
-  container: { flex: 1, backgroundColor: '#000' },
-  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 16, paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: '#222', backgroundColor: '#111' },
-  roomCodeLabel: { color: '#888', fontSize: 12 },
-  roomCode: { color: '#fff', fontSize: 24, fontWeight: 'bold', letterSpacing: 2 },
+  safeArea: { flex: 1, backgroundColor: '#0F172A' },
+  container: { flex: 1, backgroundColor: '#0F172A' },
+  header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 16, paddingVertical: 12, borderBottomWidth: 1, borderBottomColor: '#334155', backgroundColor: '#1E293B' },
+  roomCodeLabel: { color: '#94A3B8', fontSize: 12 },
+  roomCode: { color: '#F8FAFC', fontSize: 24, fontWeight: 'bold', letterSpacing: 2 },
   headerRight: { flexDirection: 'row', alignItems: 'center', gap: 16 },
-  addBtn: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#fff', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 20, gap: 4 },
-  addBtnText: { color: '#000', fontWeight: 'bold', fontSize: 14 },
+  addBtn: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#F8FAFC', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 20, gap: 4 },
+  addBtnText: { color: '#0F172A', fontWeight: 'bold', fontSize: 14 },
   leaveBtn: { padding: 4 },
   queueContainer: { flex: 1 },
   reactionButtonsContainer: {
@@ -166,10 +166,10 @@ const styles = StyleSheet.create({
     width: 60,
     height: 60,
     borderRadius: 30,
-    backgroundColor: '#007AFF',
+    backgroundColor: '#6366F1',
     justifyContent: 'center',
     alignItems: 'center',
-    shadowColor: '#000',
+    shadowColor: '#0F172A',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
     shadowRadius: 4,
@@ -179,8 +179,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: -5,
     right: -5,
-    backgroundColor: '#ff4444',
-    color: '#fff',
+    backgroundColor: '#EF4444',
+    color: '#F8FAFC',
     fontSize: 12,
     fontWeight: 'bold',
     overflow: 'hidden',
@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
   },
   chatModalContent: {
     height: '75%',
-    backgroundColor: '#121212',
+    backgroundColor: '#1E293B',
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,
     paddingHorizontal: 0, // Chat component has its own padding
@@ -208,10 +208,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingBottom: 16,
     borderBottomWidth: 1,
-    borderBottomColor: '#333',
+    borderBottomColor: '#475569',
   },
   chatModalTitle: {
-    color: '#fff',
+    color: '#F8FAFC',
     fontSize: 18,
     fontWeight: 'bold',
   },
