@@ -101,7 +101,7 @@ export default function HomeScreen() {
     <SafeAreaView style={{ flex: 1, backgroundColor: '#0F172A' }}>
       <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <View style={styles.card}>
-          <Text style={styles.title}>SyncRoom</Text>
+          <Text style={styles.title}>VibeSync</Text>
           <Text style={styles.subtitle}>Listen to YouTube together.</Text>
 
           {error ? <Text style={styles.errorText}>{error}</Text> : null}
