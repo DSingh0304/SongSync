@@ -56,12 +56,12 @@ export default function Chat() {
           value={text}
           onChangeText={setText}
           placeholder="Say something..."
-          placeholderTextColor="#888"
+          placeholderTextColor="#94A3B8"
           onSubmitEditing={handleSend}
           returnKeyType="send"
         />
         <TouchableOpacity style={styles.sendBtn} onPress={handleSend} disabled={!text.trim()}>
-          <Ionicons name="send" size={20} color={text.trim() ? '#fff' : '#555'} />
+          <Ionicons name="send" size={20} color={text.trim() ? '#F8FAFC' : '#94A3B8'} />
         </TouchableOpacity>
       </View>
     </View>
@@ -69,16 +69,16 @@ export default function Chat() {
 }
 
 const styles = StyleSheet.create({
-  container: { flex: 1, padding: 16, backgroundColor: '#121212' },
-  headerTitle: { color: '#fff', fontSize: 18, fontWeight: 'bold', marginBottom: 8 },
-  chatArea: { flex: 1, backgroundColor: '#1a1a1a', borderRadius: 8, marginBottom: 8 },
+  container: { flex: 1, padding: 16, backgroundColor: '#1E293B' },
+  headerTitle: { color: '#F8FAFC', fontSize: 18, fontWeight: 'bold', marginBottom: 8 },
+  chatArea: { flex: 1, backgroundColor: '#1E293B', borderRadius: 8, marginBottom: 8 },
   listContent: { padding: 8 },
   messageBubble: { maxWidth: '80%', padding: 10, borderRadius: 12, marginBottom: 8 },
-  myMessage: { alignSelf: 'flex-end', backgroundColor: '#2a5a2a', borderBottomRightRadius: 4 },
-  theirMessage: { alignSelf: 'flex-start', backgroundColor: '#333', borderBottomLeftRadius: 4 },
-  senderName: { color: '#aaa', fontSize: 11, marginBottom: 4, fontWeight: 'bold' },
-  messageText: { color: '#fff', fontSize: 14 },
+  myMessage: { alignSelf: 'flex-end', backgroundColor: '#065F46', borderBottomRightRadius: 4 },
+  theirMessage: { alignSelf: 'flex-start', backgroundColor: '#475569', borderBottomLeftRadius: 4 },
+  senderName: { color: '#CBD5E1', fontSize: 11, marginBottom: 4, fontWeight: 'bold' },
+  messageText: { color: '#F8FAFC', fontSize: 14 },
   inputRow: { flexDirection: 'row', alignItems: 'center' },
-  input: { flex: 1, height: 44, backgroundColor: '#222', borderRadius: 22, paddingHorizontal: 16, color: '#fff' },
-  sendBtn: { width: 44, height: 44, borderRadius: 22, backgroundColor: '#333', justifyContent: 'center', alignItems: 'center', marginLeft: 8 },
+  input: { flex: 1, height: 44, backgroundColor: '#334155', borderRadius: 22, paddingHorizontal: 16, color: '#F8FAFC' },
+  sendBtn: { width: 44, height: 44, borderRadius: 22, backgroundColor: '#475569', justifyContent: 'center', alignItems: 'center', marginLeft: 8 },
 });
