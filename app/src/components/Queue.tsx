@@ -28,7 +28,7 @@ export default function Queue() {
   const renderItem = ({ item, index }: { item: any, index: number }) => {
     const isPlaying = index === queueIndex;
     const isPast = index < queueIndex;
-    const canRemove = isHost || item.addedBy === 'me'; // Simplified
+    const canRemove = isHost || item.addedBy === useRoomStore.getState().displayName;
 
     return (
       <TouchableOpacity 
@@ -51,7 +51,7 @@ export default function Queue() {
         </View>
         {canRemove && (
           <TouchableOpacity style={styles.removeBtn} onPress={() => handleRemove(item.videoId)}>
-            <Ionicons name="trash-outline" size={20} color="#ff4444" />
+            <Ionicons name="trash-outline" size={20} color="#EF4444" />
           </TouchableOpacity>
         )}
       </TouchableOpacity>
@@ -64,7 +64,7 @@ export default function Queue() {
         <Text style={styles.headerTitle}>Playlist ({queue.length})</Text>
         {extracting && (
           <View style={styles.extractingBadge}>
-            <ActivityIndicator size="small" color="#fff" />
+            <ActivityIndicator size="small" color="#F8FAFC" />
             <Text style={styles.extractingText}>Extracting audio...</Text>
           </View>
         )}
@@ -75,7 +75,7 @@ export default function Queue() {
       ) : (
         <FlatList
           data={queue}
-          keyExtractor={(item, idx) => item.videoId + idx}
+          keyExtractor={(item) => item.videoId}
           renderItem={renderItem}
         />
       )}
@@ -86,17 +86,17 @@ export default function Queue() {
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 16 },
   header: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 },
-  headerTitle: { color: '#fff', fontSize: 18, fontWeight: 'bold' },
-  extractingBadge: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#333', paddingHorizontal: 8, paddingVertical: 4, borderRadius: 12, gap: 6 },
-  extractingText: { color: '#ccc', fontSize: 12 },
-  emptyText: { color: '#888', textAlign: 'center', marginTop: 20 },
-  item: { flexDirection: 'row', alignItems: 'center', marginBottom: 12, backgroundColor: '#1e1e1e', padding: 8, borderRadius: 8 },
-  itemPlaying: { backgroundColor: '#2e2e2e', borderColor: '#007AFF', borderWidth: 1 },
+  headerTitle: { color: '#F8FAFC', fontSize: 18, fontWeight: 'bold' },
+  extractingBadge: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#475569', paddingHorizontal: 8, paddingVertical: 4, borderRadius: 12, gap: 6 },
+  extractingText: { color: '#94A3B8', fontSize: 12 },
+  emptyText: { color: '#94A3B8', textAlign: 'center', marginTop: 20 },
+  item: { flexDirection: 'row', alignItems: 'center', marginBottom: 12, backgroundColor: '#1E293B', padding: 8, borderRadius: 8 },
+  itemPlaying: { backgroundColor: '#334155', borderColor: '#6366F1', borderWidth: 1 },
   itemPast: { opacity: 0.5 },
-  thumbnail: { width: 60, height: 45, borderRadius: 4, backgroundColor: '#333' },
+  thumbnail: { width: 60, height: 45, borderRadius: 4, backgroundColor: '#475569' },
   info: { flex: 1, marginLeft: 12 },
-  title: { color: '#fff', fontSize: 14, fontWeight: '500' },
-  titlePlaying: { color: '#007AFF', fontWeight: 'bold' },
-  subtitle: { color: '#888', fontSize: 12, marginTop: 2 },
+  title: { color: '#F8FAFC', fontSize: 14, fontWeight: '500' },
+  titlePlaying: { color: '#6366F1', fontWeight: 'bold' },
+  subtitle: { color: '#94A3B8', fontSize: 12, marginTop: 2 },
   removeBtn: { padding: 8 },
 });
