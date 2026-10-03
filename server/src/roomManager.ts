@@ -20,19 +20,16 @@ import {
   RoomRejoinSchema,
 } from './validation.js';
 
-// ─── Constants ────────────────────────────────────────────────────────────────
 const MAX_PARTICIPANTS = 8;
 const HOST_RECONNECT_GRACE_MS = 25_000; // 25 seconds
 const EMPTY_ROOM_CLEANUP_MS = 5 * 60_000; // 5 minutes
 const MAX_CHAT_HISTORY = 100;
 
-// ─── In-memory store ──────────────────────────────────────────────────────────
 export const rooms = new Map<string, RoomState>();
 
 // Maps socketId → { roomId, userId } for disconnect handling
 const socketToSession = new Map<string, { roomId: string; userId: string }>();
 
-// ─── Helpers ──────────────────────────────────────────────────────────────────
 function createInitialPlayback(): PlaybackState {
   return {
     track: null,
@@ -96,9 +93,7 @@ function scheduleRoomCleanup(room: RoomState) {
   }, EMPTY_ROOM_CLEANUP_MS);
 }
 
-// ─── Event Handlers ───────────────────────────────────────────────────────────
 export function registerRoomHandlers(io: Server, socket: Socket) {
-  // ── Create Room ──────────────────────────────────────────────────────────────
   socket.on('c2s:room:create', (rawPayload: unknown) => {
     const result = validate(RoomCreateSchema, rawPayload);
     if (!result.success) return emitError(socket, 'INVALID_PAYLOAD', result.error);
@@ -151,7 +146,6 @@ export function registerRoomHandlers(io: Server, socket: Socket) {
     console.log(`[Room ${roomId}] Created by "${displayName}" (${userId})`);
   });
 
-  // ── Join Room ─────────────────────────────────────────────────────────────────
   socket.on('c2s:room:join', (rawPayload: unknown) => {
     const result = validate(RoomJoinSchema, rawPayload);
     if (!result.success) return emitError(socket, 'INVALID_PAYLOAD', result.error);
@@ -196,7 +190,6 @@ export function registerRoomHandlers(io: Server, socket: Socket) {
     console.log(`[Room ${roomId}] "${displayName}" joined (${userId})`);
   });
 
-  // ── Leave Room ────────────────────────────────────────────────────────────────
   socket.on('c2s:room:leave', (rawPayload: unknown) => {
     const result = validate(RoomLeaveSchema, rawPayload);
     if (!result.success) return emitError(socket, 'INVALID_PAYLOAD', result.error);
@@ -204,7 +197,6 @@ export function registerRoomHandlers(io: Server, socket: Socket) {
     handleParticipantLeave(io, socket, result.data.roomId, socket.data.userId, 'voluntary');
   });
 
-  // ── Rejoin Room (reconnect after socket drop) ─────────────────────────────────
   socket.on('c2s:room:rejoin', (rawPayload: unknown) => {
     const result = validate(RoomRejoinSchema, rawPayload);
     if (!result.success) return emitError(socket, 'INVALID_PAYLOAD', result.error);
@@ -253,7 +245,6 @@ export function registerRoomHandlers(io: Server, socket: Socket) {
     console.log(`[Room ${roomId}] "${participant.displayName}" rejoined`);
   });
 
-  // ── Disconnect ─────────────────────────────────────────────────────────────────
   socket.on('disconnect', () => {
     const session = socketToSession.get(socket.id);
     if (!session) return;
@@ -316,7 +307,6 @@ export function registerRoomHandlers(io: Server, socket: Socket) {
 
 
 
-// ─── Core leave logic (shared by voluntary leave + disconnect) ─────────────────
 function handleParticipantLeave(
   io: Server,
   socket: Socket,
