@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  vibesync-backend:
+    build: .
+    container_name: vibesync-server
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
