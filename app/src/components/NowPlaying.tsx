@@ -50,15 +50,15 @@ export default function NowPlaying() {
 
 const styles = StyleSheet.create({
   emptyContainer: { alignItems: 'center', padding: 32 },
-  emptyText: { color: '#888', fontSize: 16 },
+  emptyText: { color: '#94A3B8', fontSize: 16 },
   container: { alignItems: 'center', width: '100%' },
-  thumbnail: { width: 280, height: 280, borderRadius: 12, backgroundColor: '#333', marginBottom: 16 },
+  thumbnail: { width: 280, height: 280, borderRadius: 12, backgroundColor: '#475569', marginBottom: 16 },
   info: { width: '100%', alignItems: 'center', marginBottom: 16 },
-  title: { color: '#fff', fontSize: 18, fontWeight: 'bold', textAlign: 'center' },
-  channel: { color: '#aaa', fontSize: 14, marginTop: 4 },
+  title: { color: '#F8FAFC', fontSize: 18, fontWeight: 'bold', textAlign: 'center' },
+  channel: { color: '#CBD5E1', fontSize: 14, marginTop: 4 },
   progressContainer: { width: '100%' },
-  progressBarBg: { height: 4, backgroundColor: '#444', borderRadius: 2, overflow: 'hidden' },
-  progressBarFill: { height: '100%', backgroundColor: '#fff' },
+  progressBarBg: { height: 4, backgroundColor: '#64748B', borderRadius: 2, overflow: 'hidden' },
+  progressBarFill: { height: '100%', backgroundColor: '#F8FAFC' },
   timeRow: { flexDirection: 'row', justifyContent: 'space-between', marginTop: 8 },
-  timeText: { color: '#888', fontSize: 12 },
+  timeText: { color: '#94A3B8', fontSize: 12 },
 });
