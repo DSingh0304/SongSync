@@ -98,7 +98,7 @@ export default function HomeScreen() {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: '#000' }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: '#0F172A' }}>
       <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : 'height'}>
         <View style={styles.card}>
           <Text style={styles.title}>SyncRoom</Text>
@@ -108,7 +108,7 @@ export default function HomeScreen() {
 
           <View style={styles.inputGroup}>
             <Text style={styles.label}>Your Name</Text>
-            <TextInput style={styles.input} value={displayName} onChangeText={(text) => { setDisplayName(text); setError(''); }} placeholder="e.g. Alex" placeholderTextColor="#888" maxLength={32} />
+            <TextInput style={styles.input} value={displayName} onChangeText={(text) => { setDisplayName(text); setError(''); }} placeholder="e.g. Alex" placeholderTextColor="#94A3B8" maxLength={32} />
           </View>
 
           
@@ -130,7 +130,7 @@ export default function HomeScreen() {
           <View style={styles.divider} />
 
           <TouchableOpacity style={[styles.primaryBtn, isLoading && styles.disabledBtn]} onPress={handleCreateRoom} disabled={isLoading}>
-            {isLoading ? <ActivityIndicator color="#000" /> : <Text style={styles.primaryBtnText}>Create New Room</Text>}
+            {isLoading ? <ActivityIndicator color="#0F172A" /> : <Text style={styles.primaryBtnText}>Create New Room</Text>}
           </TouchableOpacity>
 
           <View style={styles.orRow}>
@@ -141,7 +141,7 @@ export default function HomeScreen() {
 
           <View style={styles.inputGroup}>
             <Text style={styles.label}>Room Code</Text>
-            <TextInput style={[styles.input, styles.codeInput]} value={roomCode} onChangeText={(text) => { setRoomCode(text.toUpperCase()); setError(''); }} placeholder="6-CHAR CODE" placeholderTextColor="#888" maxLength={6} autoCapitalize="characters" />
+            <TextInput style={[styles.input, styles.codeInput]} value={roomCode} onChangeText={(text) => { setRoomCode(text.toUpperCase()); setError(''); }} placeholder="6-CHAR CODE" placeholderTextColor="#94A3B8" maxLength={6} autoCapitalize="characters" />
           </View>
 
           <TouchableOpacity style={[styles.secondaryBtn, isLoading && styles.disabledBtn]} onPress={handleJoinRoom} disabled={isLoading}>
@@ -155,25 +155,25 @@ export default function HomeScreen() {
 
 const styles = StyleSheet.create({
   container: { flex: 1, justifyContent: 'center', alignItems: 'center', padding: 16 },
-  card: { width: '100%', maxWidth: 400, backgroundColor: '#111', padding: 24, borderRadius: 16, borderWidth: 1, borderColor: '#333' },
-  title: { color: '#fff', fontSize: 32, fontWeight: 'bold', textAlign: 'center' },
-  subtitle: { color: '#aaa', fontSize: 16, textAlign: 'center', marginBottom: 32 },
+  card: { width: '100%', maxWidth: 400, backgroundColor: '#1E293B', padding: 24, borderRadius: 16, borderWidth: 1, borderColor: '#475569' },
+  title: { color: '#F8FAFC', fontSize: 32, fontWeight: 'bold', textAlign: 'center' },
+  subtitle: { color: '#CBD5E1', fontSize: 16, textAlign: 'center', marginBottom: 32 },
   inputGroup: { marginBottom: 16 },
-  label: { color: '#ccc', fontSize: 14, marginBottom: 8 },
-  input: { backgroundColor: '#222', color: '#fff', height: 48, borderRadius: 8, paddingHorizontal: 16, fontSize: 16 },
+  label: { color: '#94A3B8', fontSize: 14, marginBottom: 8 },
+  input: { backgroundColor: '#334155', color: '#F8FAFC', height: 48, borderRadius: 8, paddingHorizontal: 16, fontSize: 16 },
   codeInput: { letterSpacing: 2, textAlign: 'center' },
-  primaryBtn: { backgroundColor: '#fff', height: 48, borderRadius: 8, justifyContent: 'center', alignItems: 'center', marginTop: 8 },
-  primaryBtnText: { color: '#000', fontSize: 16, fontWeight: 'bold' },
-  secondaryBtn: { backgroundColor: '#333', height: 48, borderRadius: 8, justifyContent: 'center', alignItems: 'center' },
-  secondaryBtnText: { color: '#fff', fontSize: 16, fontWeight: 'bold' },
+  primaryBtn: { backgroundColor: '#F8FAFC', height: 48, borderRadius: 8, justifyContent: 'center', alignItems: 'center', marginTop: 8 },
+  primaryBtnText: { color: '#0F172A', fontSize: 16, fontWeight: 'bold' },
+  secondaryBtn: { backgroundColor: '#475569', height: 48, borderRadius: 8, justifyContent: 'center', alignItems: 'center' },
+  secondaryBtnText: { color: '#F8FAFC', fontSize: 16, fontWeight: 'bold' },
   disabledBtn: { opacity: 0.5 },
-  errorText: { color: '#ff4444', textAlign: 'center', marginBottom: 16 },
+  errorText: { color: '#EF4444', textAlign: 'center', marginBottom: 16 },
   divider: { height: 16 },
   orRow: { flexDirection: 'row', alignItems: 'center', marginVertical: 24 },
-  line: { flex: 1, height: 1, backgroundColor: '#333' },
-  orText: { color: '#888', marginHorizontal: 16 },
+  line: { flex: 1, height: 1, backgroundColor: '#475569' },
+  orText: { color: '#94A3B8', marginHorizontal: 16 },
   avatarRow: { flexDirection: 'row', justifyContent: 'space-between', marginTop: 4 },
-  avatarBtn: { width: 44, height: 44, borderRadius: 22, backgroundColor: '#222', justifyContent: 'center', alignItems: 'center' },
-  avatarBtnSelected: { borderWidth: 2, borderColor: '#4caf50', backgroundColor: '#333' },
+  avatarBtn: { width: 44, height: 44, borderRadius: 22, backgroundColor: '#334155', justifyContent: 'center', alignItems: 'center' },
+  avatarBtnSelected: { borderWidth: 2, borderColor: '#10B981', backgroundColor: '#475569' },
   avatarText: { fontSize: 24 },
 });
