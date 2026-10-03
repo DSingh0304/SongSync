@@ -14,7 +14,6 @@ function emitError(socket: Socket, code: string, message: string) {
 }
 
 export function registerQueueHandlers(io: Server, socket: Socket) {
-  // ── Add to Queue ──────────────────────────────────────────────────────────────
   socket.on('c2s:queue:add', async (rawPayload: unknown) => {
     const result = validate(QueueAddSchema, rawPayload);
     if (!result.success) return emitError(socket, 'INVALID_PAYLOAD', result.error);
@@ -68,7 +67,6 @@ export function registerQueueHandlers(io: Server, socket: Socket) {
     }
   });
 
-  // ── Remove from Queue ─────────────────────────────────────────────────────────
   socket.on('c2s:queue:remove', (rawPayload: unknown) => {
     const result = validate(QueueRemoveSchema, rawPayload);
     if (!result.success) return emitError(socket, 'INVALID_PAYLOAD', result.error);
