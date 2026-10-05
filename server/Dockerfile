@@ -3,7 +3,7 @@ FROM node:20-slim
 WORKDIR /app
 
 # Install Python and FFmpeg (required for yt-dlp) - Debian slim
-RUN apt-get update && apt-get install -y python3 ffmpeg wget && rm -rf /var/lib/apt/lists/*
+RUN apt-get update -o Acquire::Check-Valid-Until=false -o Acquire::Check-Date=false && apt-get install -y python3 ffmpeg wget && rm -rf /var/lib/apt/lists/*
 
 # Install dependencies first (better layer caching)
 COPY package*.json ./
