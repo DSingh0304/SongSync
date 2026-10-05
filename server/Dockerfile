@@ -1,3 +1,15 @@
+# Build stage
+FROM node:20-slim AS builder
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm ci
+
+COPY . .
+RUN npm run build
+
+# Production stage
 FROM node:20-slim
 
 WORKDIR /app
@@ -10,7 +22,7 @@ COPY package*.json ./
 RUN npm ci --omit=dev
 
 # Copy compiled output and yt-dlp binary
-COPY dist/ ./dist/
+COPY --from=builder /app/dist ./dist
 COPY yt-dlp ./
 
 # Ensure yt-dlp is executable
