@@ -1,4 +1,4 @@
-// serv../src/s../src/tes../src/validation.test.ts
+// server/tests/validation.test.ts
 import { describe, it, expect } from 'vitest';
 import {
   validate,
@@ -65,7 +65,7 @@ describe('QueueAddSchema', () => {
       title: 'Test',
       channelName: 'Ch',
       durationSec: 200,
-      thumbnailUrl: 'http../src//example.c../src/thumb.jpg',
+      thumbnailUrl: 'http://example.com/thumb.jpg',
     });
     expect(result.success).toBe(false);
   });
@@ -77,7 +77,7 @@ describe('QueueAddSchema', () => {
       title: 'Never Gonna Give You Up',
       channelName: 'Rick Astley',
       durationSec: 213,
-      thumbnailUrl: 'http../src//i.ytimg.c../src/../src/dQw4w9WgX../src/hqdefault.jpg',
+      thumbnailUrl: 'http://i.ytimg.com/vi/dQw4w9WgXcQ/hqdefault.jpg',
     });
     expect(result.success).toBe(true);
   });
